@@ -50,6 +50,7 @@ namespace ClubPenguinBot
             Input[] inputs = new Input[2];
 
             SetCursorPos(mouseX, mouseY);
+            System.Threading.Thread.Sleep(400);
 
             inputs[0] = new Input();
             inputs[0].type = INPUT_MOUSE;
@@ -72,6 +73,10 @@ namespace ClubPenguinBot
         public static void moveRight()
         {
             mouseClick(954, 978);
+        }
+        public static void moveDown()
+        {
+            mouseClick(873, 1059);
         }
         public static void openActionMenu()
         {

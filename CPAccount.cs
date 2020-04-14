@@ -11,7 +11,7 @@ namespace ClubPenguinBot
             bootUp,
             moveLeft,
             moveRight,
-            openActionMenu,
+            moveDown,
             startMining
         }
         public int tab { get; set; }
@@ -36,42 +36,6 @@ namespace ClubPenguinBot
                 case Action.bootUp:
                     {
                         return true;
-                    }
-                case Action.moveLeft:
-                    {
-                        TimeSpan t = currentTime - actionStartTime;
-                        if (t.TotalMilliseconds >= 0.0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                case Action.moveRight:
-                    {
-                        TimeSpan t = currentTime - actionStartTime;
-                        if (t.TotalMilliseconds >= 0.0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                case Action.openActionMenu:
-                    {
-                        TimeSpan t = currentTime - actionStartTime;
-                        if (t.TotalMilliseconds >= 0.0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
                     }
                 case Action.startMining:
                     {
@@ -101,13 +65,13 @@ namespace ClubPenguinBot
                     case Action.moveLeft:
                         {
                             WindowManip.openTab(tab);
-                            System.Threading.Thread.Sleep(900);
+                            System.Threading.Thread.Sleep(1000);
                             WindowManip.moveLeft();
-                            System.Threading.Thread.Sleep(800);
+                            System.Threading.Thread.Sleep(1000);
                             WindowManip.openActionMenu();
-                            System.Threading.Thread.Sleep(300);
+                            System.Threading.Thread.Sleep(500);
                             WindowManip.startMining();
-                            System.Threading.Thread.Sleep(300);
+                            System.Threading.Thread.Sleep(500);
                             actionStartTime = DateTime.Now;
                             lastAction = Action.startMining;
                             nextAction = Action.moveRight;
@@ -117,17 +81,37 @@ namespace ClubPenguinBot
                     case Action.moveRight:
                         {
                             WindowManip.openTab(tab);
-                            System.Threading.Thread.Sleep(900);
+                            System.Threading.Thread.Sleep(1000);
                             WindowManip.moveRight();
-                            System.Threading.Thread.Sleep(800);
+                            System.Threading.Thread.Sleep(1000);
                             WindowManip.openActionMenu();
-                            System.Threading.Thread.Sleep(300);
+                            System.Threading.Thread.Sleep(500);
                             WindowManip.startMining();
-                            System.Threading.Thread.Sleep(300);
+                            System.Threading.Thread.Sleep(500);
+                            actionStartTime = DateTime.Now;
+                            lastAction = Action.startMining;
+                            nextAction = Action.moveDown;
+                            lastMovement = Action.moveRight;
+                            break;
+                        }
+                    case Action.moveDown:
+                        {
+                            WindowManip.openTab(tab);
+                            System.Threading.Thread.Sleep(1000);
+                            WindowManip.moveDown();
+                            System.Threading.Thread.Sleep(1000);
+                            WindowManip.openActionMenu();
+                            System.Threading.Thread.Sleep(500);
+                            WindowManip.startMining();
+                            System.Threading.Thread.Sleep(500);
                             actionStartTime = DateTime.Now;
                             lastAction = Action.startMining;
                             nextAction = Action.moveLeft;
-                            lastMovement = Action.moveRight;
+                            lastMovement = Action.moveDown;
+                            break;
+                        }
+                    default:
+                        {
                             break;
                         }
                 }
